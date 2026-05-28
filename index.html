@@ -1,17 +1,358 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEFR A1-A2 ドイツ語単語パーツアカデミー</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#fbeee9',
+                            200: '#f7dad0',
+                            300: '#f0bba9',
+                            400: '#e39178',
+                            500: '#d2694b',
+                            600: '#be4e31',
+                            700: '#9e3c25',
+                            800: '#803221',
+                            900: '#672b1e',
+                            950: '#38140e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+        
+        .part-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .part-card:hover {
+            transform: translateY(-2px);
+        }
+        .puzzle-slot {
+            transition: all 0.2s ease;
+        }
+        .shake-animation {
+            animation: shake 0.5s ease-in-out;
+        }
+        .bounce-animation {
+            animation: bounce-scale 0.5s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        @keyframes bounce-scale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 dark:bg-stone-900 dark:text-stone-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-stone-950/80 backdrop-blur border-b border-stone-200 dark:border-stone-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-brand-600 text-white rounded-xl shadow-md shadow-brand-600/20">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-lg font-bold tracking-tight text-stone-900 dark:text-white">Wortbausteine</h1>
+                    <p class="text-[10px] sm:text-xs text-stone-500 dark:text-stone-400">ドイツ語単語パーツアカデミー (CEFR A1-A2)</p>
+                </div>
+            </div>
+
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <!-- Progress Mini Widget -->
-                <div class="hidden md:flex items-center bg-stone-100 dark:bg-stone-700/50 px-3 py-1.5 rounded-lg text-xs font-medium space-x-2">
-                    <span class="text-stone-500 dark:text-stone-400">マスターしたパーツ:</span>
+                <div class="flex items-center bg-stone-100 dark:bg-stone-800 px-3 py-1.5 rounded-lg text-xs font-medium space-x-2">
+                    <span class="text-stone-500 dark:text-stone-400 hidden sm:inline">習得パーツ:</span>
                     <span id="header-progress-count" class="text-brand-600 dark:text-brand-400 font-bold">0 / 22</span>
                 </div>
                 
                 <!-- Dark Mode Toggle -->
-<!-- ... existing code ... -->
-<body class="bg-stone-50 text-stone-800 dark:bg-stone-900 dark:text-stone-100 min-h-screen flex flex-col">
+                <button id="theme-toggle" class="p-2 text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-lg transition-colors" aria-label="ダークモード切り替え">
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.46 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- INTRO & STATS HERO -->
+        <div class="bg-gradient-to-br from-brand-900 via-stone-900 to-stone-950 text-white rounded-3xl p-6 sm:p-8 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e39178_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                <div class="lg:col-span-2 space-y-3">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/20 text-brand-300 border border-brand-500/30">
+                        CEFR A1-A2 ドイツ語語彙形成
+                    </span>
+                    <h2 class="text-2xl sm:text-3.5xl font-extrabold tracking-tight">
+                        単語の「パーツ」を繋げて、<br class="hidden sm:inline" />ドイツ語の語彙力を爆発的に広げよう。
+                    </h2>
+                    <p class="text-stone-300 text-xs sm:text-sm leading-relaxed max-w-xl">
+                        ドイツ語は、接頭辞（Präfix）、語根（Stamm）、接尾辞（Suffix）がレゴブロックのように結びついて無限の単語を作ります。
+                        このサイトでは、パーツを組み合わせたり分解したりする実践的なパズルやクイズを通して、語彙の仕組みを直感的にマスターできます。
+                    </p>
+                </div>
+                <!-- Mini Stats Board -->
+                <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-4 sm:p-5 grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <span class="block text-[11px] text-stone-400 uppercase tracking-wider">総回答数</span>
+                        <span id="stats-total-answers" class="text-2xl sm:text-3xl font-bold text-white">0</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-[11px] text-stone-400 uppercase tracking-wider">正解率</span>
+                        <span id="stats-accuracy" class="text-2xl sm:text-3xl font-bold text-brand-400">0%</span>
+                    </div>
+                    <div class="col-span-2 border-t border-white/10 pt-3 flex justify-between items-center text-xs text-stone-300">
+                        <span>パズル高得点:</span>
+                        <span class="font-mono font-bold text-brand-300"><span id="const-score">0</span> pts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVIGATION TABS -->
+        <div class="flex border-b border-stone-200 dark:border-stone-800 mb-6 overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('lexikon')" id="tab-lexikon" class="flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                <span>📖 パーツ図鑑 (Lexikon)</span>
+            </button>
+            <button onclick="switchTab('constructor')" id="tab-constructor" class="flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
+                <span>🧩 組み立てパズル (Wort-Bauer)</span>
+            </button>
+            <button onclick="switchTab('deconstructor')" id="tab-deconstructor" class="flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                <span>🔍 分解クイズ (Wort-Zerstörer)</span>
+            </button>
+        </div>
+
+        <!-- APP CONTENT VIEWS -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- LEFT PANEL (Main interactive space) -->
+            <div id="left-main-panel" class="lg:col-span-8 space-y-6">
+                
+                <!-- VIEW 1: LEXIKON -->
+                <div id="view-lexikon" class="space-y-6">
+                    <!-- Filters -->
+                    <div class="flex flex-wrap gap-2 items-center bg-white dark:bg-stone-800 p-3 rounded-2xl border border-stone-200 dark:border-stone-800">
+                        <span class="text-xs font-semibold text-stone-400 uppercase tracking-wider px-2">フィルター:</span>
+                        <button onclick="filterLexikon('all')" id="btn-filter-all" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white dark:bg-brand-500">
+                            すべて (22)
+                        </button>
+                        <button onclick="filterLexikon('prefix')" id="btn-filter-prefix" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600">
+                            接頭辞 (7)
+                        </button>
+                        <button onclick="filterLexikon('root')" id="btn-filter-root" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600">
+                            語根 (8)
+                        </button>
+                        <button onclick="filterLexikon('suffix')" id="btn-filter-suffix" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600">
+                            接尾辞 (7)
+                        </button>
+                    </div>
+
+                    <!-- Lexikon Cards Grid -->
+                    <div id="lexikon-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Dynamic content injected here -->
+                    </div>
+                </div>
+
+                <!-- VIEW 2: CONSTRUCTOR (Wort-Bauer) -->
+                <div id="view-constructor" class="hidden space-y-6">
+                    <div class="bg-white dark:bg-stone-800 p-6 rounded-3xl border border-stone-200 dark:border-stone-800 space-y-6">
+                        <div class="flex justify-between items-center border-b border-stone-100 dark:border-stone-700 pb-4">
+                            <div>
+                                <span class="text-xs font-bold text-brand-600 dark:text-brand-400 tracking-wide uppercase">Wort-Bauer</span>
+                                <h3 class="text-lg font-bold text-stone-900 dark:text-white">組み立てパズル</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[10px] text-stone-400 block">現在のコンボスコア</span>
+                                <span id="const-current-streak" class="text-xl font-mono font-bold text-stone-900 dark:text-white">0</span>
+                            </div>
+                        </div>
+
+                        <!-- Target Prompt -->
+                        <div class="bg-stone-50 dark:bg-stone-900/50 p-5 rounded-2xl border border-stone-100 dark:border-stone-800/80 text-center space-y-2">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                                お題をビルドせよ！
+                            </span>
+                            <div id="puzzle-target-mean" class="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-white">---</div>
+                            <p id="puzzle-target-hint" class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 max-w-md mx-auto">---</p>
+                        </div>
+
+                        <!-- Assembly Slot Zone -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-stone-400 uppercase tracking-wider">組み立てスペース</label>
+                            <div id="puzzle-assembly-zone" class="min-h-[70px] bg-stone-100/60 dark:bg-stone-950/40 border-2 border-dashed border-stone-200 dark:border-stone-800 rounded-2xl flex flex-wrap gap-2 items-center justify-center p-3">
+                                <!-- User combined parts go here -->
+                            </div>
+                        </div>
+
+                        <!-- Options Tiles -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-stone-400 uppercase tracking-wider">利用可能なパーツ</label>
+                            <div id="puzzle-options-zone" class="flex flex-wrap gap-2.5 justify-center p-2">
+                                <!-- Dynamic part options go here -->
+                            </div>
+                        </div>
+
+                        <!-- Action Bar -->
+                        <div class="flex gap-3 pt-2">
+                            <button onclick="clearPuzzleAssembly()" class="flex-1 py-3 bg-stone-100 dark:bg-stone-700 hover:bg-stone-200 dark:hover:bg-stone-600 rounded-xl text-xs font-bold transition-all">
+                                クリア
+                            </button>
+                            <button onclick="checkPuzzleAnswer()" class="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white dark:bg-brand-500 dark:hover:bg-brand-600 rounded-xl text-xs font-bold shadow-md shadow-brand-600/10 transition-all">
+                                決定・検証
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 3: DECONSTRUCTOR (Wort-Zerstörer) -->
+                <div id="view-deconstructor" class="hidden space-y-6">
+                    <div class="bg-white dark:bg-stone-800 p-6 rounded-3xl border border-stone-200 dark:border-stone-800 space-y-6">
+                        <div class="flex justify-between items-center border-b border-stone-100 dark:border-stone-700 pb-4">
+                            <div>
+                                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wide uppercase">Wort-Zerstörer</span>
+                                <h3 class="text-lg font-bold text-stone-900 dark:text-white">パーツ分解クイズ</h3>
+                            </div>
+                        </div>
+
+                        <!-- Target Word Display -->
+                        <div class="text-center py-6 space-y-2">
+                            <span class="text-xs text-stone-400 font-medium">この単語を分解すると？</span>
+                            <div id="decon-word-display" class="text-3xl sm:text-4.5xl font-extrabold tracking-wider text-brand-600 dark:text-brand-400 font-mono">---</div>
+                            <p id="decon-word-mean" class="text-xs text-stone-500 dark:text-stone-400">意味: ---</p>
+                        </div>
+
+                        <!-- Choices Grid -->
+                        <div id="decon-choices-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <!-- 4 Choices Buttons dynamic injection -->
+                        </div>
+
+                        <div class="flex justify-end pt-2">
+                            <button onclick="generateDeconstructorQuiz()" class="px-5 py-2.5 bg-stone-100 dark:bg-stone-700 hover:bg-stone-200 dark:hover:bg-stone-600 rounded-xl text-xs font-bold transition-all">
+                                パスして次へ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT PANEL (Details, Masters Info, Glossary) -->
+            <div id="right-panel" class="lg:col-span-4 space-y-6">
+                <!-- Part Inspector Detail View -->
+                <div class="bg-white dark:bg-stone-800 p-6 rounded-3xl border border-stone-200 dark:border-stone-800 space-y-5">
+                    <h3 class="text-sm font-bold text-stone-400 tracking-wider uppercase">🔍 パーツ解説スコープ</h3>
+                    
+                    <div id="inspector-placeholder" class="text-center py-10 space-y-2">
+                        <div class="w-12 h-12 bg-stone-100 dark:bg-stone-700 rounded-full flex items-center justify-center mx-auto text-stone-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <p class="text-xs text-stone-500">図鑑のパーツカードをクリックするか、ゲーム中に単語を確認するとここに詳細な結合性質が表示されます。</p>
+                    </div>
+
+                    <div id="inspector-content" class="hidden space-y-4">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span id="inspector-badge" class="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2">---</span>
+                                <h4 id="inspector-text" class="text-2xl font-extrabold tracking-tight text-stone-900 dark:text-white">---</h4>
+                            </div>
+                            <span id="inspector-level" class="text-xs font-bold px-2 py-1 bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 rounded-lg">A1</span>
+                        </div>
+
+                        <div class="space-y-1">
+                            <span class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider">基本的な意味</span>
+                            <p id="inspector-mean" class="text-sm font-semibold text-stone-800 dark:text-stone-200">---</p>
+                        </div>
+
+                        <div class="space-y-1">
+                            <span class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider">特徴と機能</span>
+                            <p id="inspector-desc" class="text-xs text-stone-500 dark:text-stone-400 leading-relaxed">---</p>
+                        </div>
+
+                        <div class="border-t border-stone-100 dark:border-stone-700 pt-4 space-y-2.5">
+                            <span class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider">代表的な単語ビルド例</span>
+                            <div id="inspector-examples" class="space-y-2 text-xs">
+                                <!-- Dynamic examples injected -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mastered List Tracker -->
+                <div class="bg-white dark:bg-stone-800 p-6 rounded-3xl border border-stone-200 dark:border-stone-800 space-y-4">
+                    <div class="flex justify-between items-center border-b border-stone-100 dark:border-stone-700 pb-3">
+                        <h3 class="text-sm font-bold text-stone-900 dark:text-white">🏆 習得パーツバッジ</h3>
+                        <span id="master-badge-ratio" class="text-xs font-semibold text-brand-600 dark:text-brand-400">0/22</span>
+                    </div>
+                    <div id="mastered-parts-container" class="flex flex-wrap gap-1.5 min-h-[40px] items-center text-xs text-stone-400">
+                        まだ習得したパーツがありません。クイズやパズルをクリアしてパーツをマスターしましょう！
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- NOTIFICATION TOAST -->
+        <div id="custom-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-sm w-full bg-white dark:bg-stone-800 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-700 p-4 flex items-center space-x-3">
+            <div id="toast-icon-box" class="p-2 rounded-xl text-white">
+                <!-- Icon Injected dynamically -->
+            </div>
+            <div class="flex-1">
+                <p id="toast-message" class="text-xs sm:text-sm font-bold text-stone-900 dark:text-white">---</p>
+                <p id="toast-sub-message" class="text-[10px] sm:text-xs text-stone-500 dark:text-stone-400">---</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 py-6 mt-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+            <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400">
+                © 2026 Deutsch Wortbausteine Akademie. ドイツ語初学者(A1-A2)向けの語構成・結合学習ツール。
+            </p>
+            <div class="flex justify-center space-x-4 text-[10px] sm:text-xs text-stone-400 dark:text-stone-500">
+                <span>接頭辞(Präfixe) 7種類</span>
+                <span>•</span>
+                <span>接尾辞(Suffixe) 7種類</span>
+                <span>•</span>
+                <span>語根(Wortstämme) 8種類</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
     <script>
-        // CEFR A1-A2 Level German Word Parts Database (Wortbausteine)
+        // CEFR A1-A2 Level German Word Parts Database (Wortbausteine) - 22 Parts in Total
         const WORD_PARTS_DATA = {
             prefixes: [
                 { id: "gp-un", text: "un-", type: "prefix", mean: "非〜、不〜（否定・反対）", level: "A1", desc: "形容詞や名詞の頭について「反対の意味」や「否定」を付与します。", examples: [{ word: "unglücklich", break: "un + glücklich(幸せな)", mean: "不幸せな (A1)" }, { word: "unfreundlich", break: "un + freundlich(親切な)", mean: "不親切な (A1)" }, { word: "unwichtig", break: "un + wichtig(重要な)", mean: "重要でない (A2)" }] },
@@ -43,51 +384,603 @@
             ]
         };
 
-        // Complete list of German words for interactive games
+        // Complete list of German words for interactive games (67 elements!)
         const WORD_GAME_DATA = [
+            // --- PREFIX BASED WORDS ---
             { word: "unglücklich", hint: "「幸せ(glücklich)」ではない、悲しい状態", parts: ["un", "glücklich"], category: "prefix", mean: "不幸せな" },
             { word: "unfreundlich", hint: "「親切(freundlich)」ではない、冷淡な様子", parts: ["un", "freundlich"], category: "prefix", mean: "不親切な" },
             { word: "unwichtig", hint: "「重要(wichtig)」ではない、取るに足らない", parts: ["un", "wichtig"], category: "prefix", mean: "重要でない" },
+            { word: "unsicher", hint: "「安全・確か(sicher)」ではない、不安な・怪しい様子", parts: ["un", "sicher"], category: "prefix", mean: "不安な、不確かな" },
+            { word: "unleserlich", hint: "「読める(leserlich)」ではない、なぐり書きで読みにくい字など", parts: ["un", "leserlich"], category: "prefix", mean: "読みにくい、判読不能な" },
+            { word: "Unglück", hint: "「幸運(Glück)」の反対(名詞は大文字スタート)", parts: ["un", "Glück"], category: "prefix", mean: "不幸、災害" },
+            { word: "unruhig", hint: "「静か(ruhig)」ではない、そわそわして落ち着かない様子", parts: ["un", "ruhig"], category: "prefix", mean: "落ち着かない、不安な" },
+            { word: "unbekannt", hint: "「知られている(bekannt)」ではない、見知らぬ", parts: ["un", "bekannt"], category: "prefix", mean: "未知の、無名の" },
+            
             { word: "bezahlen", hint: "お金を「支払う(zahlen)」、会計する", parts: ["be", "zahlen"], category: "prefix", mean: "〜を支払う" },
             { word: "beantworten", hint: "手紙や質問などに「答える(antworten)」(他動詞)", parts: ["be", "antworten"], category: "prefix", mean: "答える" },
             { word: "beschreiben", hint: "物事の様子を「書く(schreiben)」ことで説明する", parts: ["be", "schreiben"], category: "prefix", mean: "説明・描写する" },
+            { word: "befragen", hint: "専門家や市民に「尋ねる(fragen)」ことで調査する", parts: ["be", "fragen"], category: "prefix", mean: "インタビューする、尋ねる" },
+            { word: "besuchen", hint: "友達の家や都市を「探して訪れる(suchen)」", parts: ["be", "suchen"], category: "prefix", mean: "訪問する、お見舞いする" },
+            { word: "behalten", hint: "手元にそのまま「持っておく(halten)」、キープする", parts: ["be", "halten"], category: "prefix", mean: "保持する、とっておく" },
+            
             { word: "verkaufen", hint: "「買う(kaufen)」の反対。お金を取って商品を譲る", parts: ["ver", "kaufen"], category: "prefix", mean: "売る" },
-            { word: "verreisen", hint: "元いた場所から「旅に出る(reisen)」", parts: ["ver", "reisen"], category: "prefix", mean: "旅に出る" },
+            { word: "verreisen", hint: "元いた場所から遠くへ「旅立つ(reisen)」", parts: ["ver", "reisen"], category: "prefix", mean: "旅に出る" },
+            { word: "versprechen", hint: "言葉を交わして「約束する(sprechen)」", parts: ["ver", "sprechen"], category: "prefix", mean: "約束する" },
+            { word: "verpassen", hint: "乗る予定だった電車やバスを「逃してしまう」", parts: ["ver", "passen"], category: "prefix", mean: "乗り遅れる、逃す" },
+            { word: "vergessen", hint: "記憶から消えてしまう、うっかり忘れる", parts: ["ver", "gessen"], category: "prefix", mean: "忘れる" },
+            { word: "verändern", hint: "状態や性質をガラリと別のものに変える", parts: ["ver", "ändern"], category: "prefix", mean: "変化させる、変える" },
+            
             { word: "mitbringen", hint: "一緒の場所に「持ってくる(bringen)」(分離動詞)", parts: ["mit", "bringen"], category: "prefix", mean: "持参する" },
             { word: "mitarbeiten", hint: "チームで「働く(arbeiten)」(分離動詞)", parts: ["mit", "arbeiten"], category: "prefix", mean: "共同で働く" },
-            { word: "Lehrer", hint: "学校などで教える「男性(lehr + -er)」(名詞は大文字スタート)", parts: ["lehr", "er"], category: "suffix", mean: "男性教師" },
-            { word: "Spieler", hint: "ゲームや競技をする「男性(spiel + -er)」(名詞は大文字スタート)", parts: ["spiel", "er"], category: "suffix", mean: "選手、男性プレイヤー" },
-            { word: "Lehrerin", hint: "女性の「教師(Lehrer + -in)」(名詞は大文字スタート)", parts: ["Lehrer", "in"], category: "suffix", mean: "女性教師" },
-            { word: "Spielerin", hint: "女性の「選手(Spieler + -in)」(名詞は大文字スタート)", parts: ["Spieler", "in"], category: "suffix", mean: "女性選手" },
-            { word: "Wohnung", hint: "人が住む(wohn)ための家、アパート(名詞は大文字スタート)", parts: ["wohn", "ung"], category: "suffix", mean: "住まい、アパート" },
-            { word: "Einladung", hint: "イベントに招待(einlad)すること(名詞は大文字スタート)", parts: ["einlad", "ung"], category: "suffix", mean: "招待、招待状" },
-            { word: "freundlich", hint: "友達(Freund)のような、親しみやすい様子", parts: ["Freund", "lich"], category: "suffix", mean: "親切な" },
-            { word: "täglich", hint: "日(Tag)ごとの、連日の", parts: ["Tag", "lich"], category: "suffix", mean: "毎日の" },
-            { word: "arbeitslos", hint: "仕事(Arbeit)を失って探している状態", parts: ["Arbeit", "los"], category: "suffix", mean: "失業した" },
-            { word: "kinderlos", hint: "家庭に子供(Kinder)がいない状態", parts: ["Kinder", "los"], category: "suffix", mean: "子供がいない" },
-            { word: "Krankheit", hint: "体調が悪い(krank)状態(名詞は大文字スタート)", parts: ["krank", "heit"], category: "suffix", mean: "病気" },
-            { word: "Freiheit", hint: "誰にも縛られない自由(frei)な状態(名詞は大文字スタート)", parts: ["frei", "heit"], category: "suffix", mean: "自由" },
+            { word: "mitkommen", hint: "相手と一緒に「来る(kommen)」(分離動詞)", parts: ["mit", "kommen"], category: "prefix", mean: "一緒に行く/来る" },
+            { word: "mitmachen", hint: "イベントや活動に一緒に「参加して行う(machen)」(分離動詞)", parts: ["mit", "machen"], category: "prefix", mean: "参加する" },
+            { word: "mitnehmen", hint: "物を一緒に「持って行く(nehmen)」(分離動詞)", parts: ["mit", "nehmen"], category: "prefix", mean: "連れて行く、持参する" },
+            { word: "mitspielen", hint: "トランプやゲーム、スポーツに一緒に加わる(分離動詞)", parts: ["mit", "spielen"], category: "prefix", mean: "一緒に遊ぶ、加わる" },
+            
             { word: "einkaufen", hint: "店の中へ行って「買う(kaufen)」こと、買い出し(分離動詞)", parts: ["ein", "kaufen"], category: "prefix", mean: "買い物をする" },
             { word: "einladen", hint: "相手を中に引き入れる、イベントに「誘う」(分離動詞)", parts: ["ein", "laden"], category: "prefix", mean: "招待する" },
+            { word: "einsteigen", hint: "電車やバスの中に「登り入る(steigen)」(分離動詞)", parts: ["ein", "steigen"], category: "prefix", mean: "乗車する" },
+            { word: "einfahren", hint: "列車や乗り物が駅などの「中に入り進む」(分離動詞)", parts: ["ein", "fahren"], category: "prefix", mean: "（列車が）進入する" },
+            { word: "eintragen", hint: "リストやノートの「中に書き入れる」(分離動詞)", parts: ["ein", "tragen"], category: "prefix", mean: "登録する、書き込む" },
+            
             { word: "ausgehen", hint: "家から外へ「行く(gehen)」、夜遊びする(分離動詞)", parts: ["aus", "gehen"], category: "prefix", mean: "外出する" },
             { word: "ausfüllen", hint: "空欄を完全に「満たす(füllen)」、書類に書く(分離動詞)", parts: ["aus", "füllen"], category: "prefix", mean: "記入する" },
-            { word: "mitkomm", hint: "相手と一緒に「来る(komm)」(分離動詞)", parts: ["mit", "komm"], category: "prefix", mean: "一緒に行く/来る" },
+            { word: "aussteigen", hint: "乗り物から外へ「降りる(steigen)」(分離動詞)", parts: ["aus", "steigen"], category: "prefix", mean: "下車する" },
+            { word: "ausfahren", hint: "車などで外へ「ドライブに出かける」(分離動詞)", parts: ["aus", "fahren"], category: "prefix", mean: "（車で）出発する、ドライブに行く" },
+            { word: "ausmachen", hint: "電気やテレビを「消す」(分離動詞)", parts: ["aus", "machen"], category: "prefix", mean: "消す、消灯する" },
+            
+            { word: "Geschwister", hint: "兄弟や姉妹の集まり(集合接頭辞 ge-)", parts: ["ge", "Schwister"], category: "prefix", mean: "兄弟姉妹" },
+            { word: "gefallen", hint: "好みにカチッと落ちて「気に入る」", parts: ["ge", "fallen"], category: "prefix", mean: "気に入る" },
+            { word: "Gespräch", hint: "話し合い、おしゃべりの集まり(名詞は大文字スタート)", parts: ["ge", "spräch"], category: "prefix", mean: "会話、対談" },
+
+            // --- SUFFIX BASED WORDS ---
+            { word: "Lehrer", hint: "学校などで教える「男性(lehr + -er)」(名詞は大文字スタート)", parts: ["lehr", "er"], category: "suffix", mean: "男性教師" },
+            { word: "Spieler", hint: "ゲームや競技をする「男性(spiel + -er)」(名詞は大文字スタート)", parts: ["spiel", "er"], category: "suffix", mean: "選手、男性プレイヤー" },
+            { word: "Käufer", hint: "市場やお店で「買う(kauf)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["kauf", "er"], category: "suffix", mean: "買い手、顧客" },
+            { word: "Fahrer", hint: "乗り物を「運転して移動する(fahr)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["fahr", "er"], category: "suffix", mean: "運転手" },
+            { word: "Schreiber", hint: "文字や本を「書く(schreib)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["schreib", "er"], category: "suffix", mean: "筆者、書き手" },
+            { word: "Arbeiter", hint: "工場や現場で「働く(arbeit)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["arbeit", "er"], category: "suffix", mean: "労働者" },
+            { word: "Bäcker", hint: "パンを「焼く(back)」職人の「男性(-er)」(名詞は大文字スタート)", parts: ["bäck", "er"], category: "suffix", mean: "パン職人(男性)" },
+            
+            { word: "Lehrerin", hint: "女性の「教師(Lehrer + -in)」(名詞は大文字スタート)", parts: ["Lehrer", "in"], category: "suffix", mean: "女性教師" },
+            { word: "Spielerin", hint: "女性の「選手(Spieler + -in)」(名詞は大文字スタート)", parts: ["Spieler", "in"], category: "suffix", mean: "女性選手" },
+            { word: "Käuferin", hint: "お店で「買う(kauf)」をする「女性(-in)」(名詞は大文字スタート)", parts: ["Käufer", "in"], category: "suffix", mean: "女性の買い手" },
+            { word: "Fahrerin", hint: "乗り物を「運転する」ことを職業とする「女性(-in)」(名詞は大文字スタート)", parts: ["Fahrer", "in"], category: "suffix", mean: "女性運転手" },
+            { word: "Arbeiterin", hint: "工場や現場で「働く」をする「女性(-in)」(名詞は大文字スタート)", parts: ["Arbeiter", "in"], category: "suffix", mean: "女性労働者" },
+            { word: "Bäckerin", hint: "パンを「焼く」職人の「女性(-in)」(名詞は大文字スタート)", parts: ["Bäcker", "in"], category: "suffix", mean: "パン職人(女性)" },
+            { word: "Freundin", hint: "親しい「女友達・彼女」(名詞は大文字スタート)", parts: ["Freund", "in"], category: "suffix", mean: "女友達、彼女" },
+            
+            { word: "Wohnung", hint: "人が住む(wohn)ための家、アパート(名詞は大文字スタート)", parts: ["wohn", "ung"], category: "suffix", mean: "住まい、アパート" },
+            { word: "Einladung", hint: "イベントに招待(einlad)すること(名詞は大文字スタート)", parts: ["einlad", "ung"], category: "suffix", mean: "招待、招待状" },
+            { word: "Übung", hint: "何度も繰り返して「練習する(üb)」こと(名詞は大文字スタート)", parts: ["üb", "ung"], category: "suffix", mean: "練習、練習問題" },
+            { word: "Heizung", hint: "部屋を「暖める(heiz)」ための設備(名詞は大文字スタート)", parts: ["heiz", "ung"], category: "suffix", mean: "暖房、ヒーター" },
+            { word: "Öffnung", hint: "壁などに「開けられた(öffn)」スペースや穴(名詞は大文字スタート)", parts: ["öffn", "ung"], category: "suffix", mean: "開口部、隙間" },
+            { word: "Zahlung", hint: "お金の「支払い(zahl)」(名詞は大文字スタート)", parts: ["zahl", "ung"], category: "suffix", mean: "支払い、決済" },
+            
+            { word: "freundlich", hint: "友達(Freund)のような、親しみやすい様子", parts: ["Freund", "lich"], category: "suffix", mean: "親切な" },
+            { word: "täglich", hint: "日(Tag)ごとの、連日の", parts: ["Tag", "lich"], category: "suffix", mean: "毎日の" },
+            { word: "pünktlich", hint: "時間(Punkt＝点)をきっちり守る様子", parts: ["Punkt", "lich"], category: "suffix", mean: "時間厳守の" },
+            { word: "wirklich", hint: "実際に「作用・効果がある(wirk)」、本物の、真実の", parts: ["wirk", "lich"], category: "suffix", mean: "本当に、実際の" },
+            { word: "natürlich", hint: "「自然(Natur)」に基づいた、言うまでもなく当然の", parts: ["Natur", "lich"], category: "suffix", mean: "自然な、もちろん" },
+            
+            { word: "arbeitslos", hint: "仕事(Arbeit)を失って探している状態", parts: ["Arbeit", "los"], category: "suffix", mean: "失業した" },
+            { word: "kinderlos", hint: "家庭に子供(Kinder)がいない状態", parts: ["Kinder", "los"], category: "suffix", mean: "子供がいない" },
+            { word: "sinnlos", hint: "「意味(Sinn)」を失っている、やっても無駄なこと", parts: ["Sinn", "los"], category: "suffix", mean: "無意味な" },
+            { word: "endlos", hint: "「終わり(Ende)」がない、果てしなく続く様子", parts: ["Ende", "los"], category: "suffix", mean: "終わりのない" },
+            
+            { word: "Krankheit", hint: "体調が悪い(krank)状態(名詞は大文字スタート)", parts: ["krank", "heit"], category: "suffix", mean: "病気" },
+            { word: "Freiheit", hint: "誰にも縛られない自由(frei)な状態(名詞は大文字スタート)", parts: ["frei", "heit"], category: "suffix", mean: "自由" },
+            { word: "Schönheit", hint: "「美しい(schön)」という性質やその姿(名詞は大文字スタート)", parts: ["schön", "heit"], category: "suffix", mean: "美しさ、美人" },
+            { word: "Sicherheit", hint: "「安全・確か(sicher)」である状態や保障(名詞は大文字スタート)", parts: ["sicher", "heit"], category: "suffix", mean: "安全、確実、セキュリティ" },
+            { word: "Schnelligkeit", hint: "「速い(schnell)」こと、スピード感(名詞は大文字スタート)", parts: ["schnell", "keit"], category: "suffix", mean: "迅速さ、速さ" },
+            
             { word: "trinkbar", hint: "その水や飲み物が「飲む(trink)」ことが「できる(-bar)」状態", parts: ["trink", "bar"], category: "suffix", mean: "飲用可能な" },
             { word: "machbar", hint: "計画などが「行う(mach)」ことが「できる(-bar)」状態", parts: ["mach", "bar"], category: "suffix", mean: "実現可能な" },
             { word: "wunderbar", hint: "奇跡(Wunder)のような、素晴らしい様子", parts: ["Wunder", "bar"], category: "suffix", mean: "素晴らしい" },
-            { word: "mitmachen", hint: "イベントや活動に一緒に「参加して行う(mach)」(分離動詞)", parts: ["mit", "mach"], category: "prefix", mean: "参加する" },
-            { word: "Käufer", hint: "市場やお店で「買う(kauf)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["kauf", "er"], category: "suffix", mean: "買い手、顧客" },
-            { word: "Käuferin", hint: "お店で「買う(kauf)」をする「女性(-in)」(名詞は大文字スタート)", parts: ["kauf", "in"], category: "suffix", mean: "女性の買い手" },
-            { word: "Fahrer", hint: "乗り物を「運転して移動する(fahr)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["fahr", "er"], category: "suffix", mean: "運転手" },
-            { word: "Fahrerin", hint: "乗り物を「運転して移動する(fahr)」をする「女性(-in)」(名詞はある大文字スタート)", parts: ["fahr", "in"], category: "suffix", mean: "女性運転手" },
-            { word: "Schreiber", hint: "文字や本を「書く(schreib)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["schreib", "er"], category: "suffix", mean: "筆者、書き手" },
-            { word: "Arbeiter", hint: "工場や現場で「働く(arbeit)」をする「男性(-er)」(名詞は大文字スタート)", parts: ["arbeit", "er"], category: "suffix", mean: "労働者" },
-            { word: "Arbeiterin", hint: "工場や現場で「働く(arbeit)」をする「女性(-in)」(名詞は大文字スタート)", parts: ["arbeit", "in"], category: "suffix", mean: "女性労働者" },
-            { word: "Übung", hint: "何度も繰り返して「練習する(üb)」こと(名詞は大文字スタート)", parts: ["üb", "ung"], category: "suffix", mean: "練習、練習問題" },
-            { word: "pünktlich", hint: "時間(Punkt＝点)をきっちり守る様子", parts: ["Punkt", "lich"], category: "suffix", mean: "時間厳守の" }
+            { word: "essbar", hint: "その植物や食材が「食べる(ess)」ことができる状態", parts: ["ess", "bar"], category: "suffix", mean: "食べられる" },
+            { word: "lesbar", hint: "字がきれいで「読む(les)」ことができる状態", parts: ["les", "bar"], category: "suffix", mean: "判読できる、読みやすい" }
         ];
-    </script>
-<!-- ... existing code ... -->
+
+        // Global User Session State
+        let userData = {
+            masteredParts: [], // Stores unique mastered part IDs
+            stats: {
+                totalAnswers: 0,
+                correctAnswers: 0,
+                constructorScore: 0,
+                constructorStreak: 0
+            }
+        };
+
+        // Current Interactive Task References
+        let currentPuzzleWord = null;
+        let puzzleSelectedParts = [];
+        let currentDeconWord = null;
+
+        // Initialize App on DOM Ready
+        window.onload = function() {
+            loadUserData();
+            initTheme();
+            renderLexikon('all');
+            initConstructorPuzzle();
+            generateDeconstructorQuiz();
+            updateStatsUI();
+            updateMasteredPartsUI();
+        };
+
+        // Save and Load Session Data locally (Simulated)
+        function saveUserData() {
+            localStorage.setItem('wortbausteine_userdata_v2', JSON.stringify(userData));
+        }
+
+        function loadUserData() {
+            const saved = localStorage.getItem('wortbausteine_userdata_v2');
+            if (saved) {
+                try {
+                    userData = JSON.parse(saved);
+                    // Standard fallback config
+                    if (!userData.masteredParts) userData.masteredParts = [];
+                    if (!userData.stats) userData.stats = { totalAnswers: 0, correctAnswers: 0, constructorScore: 0, constructorStreak: 0 };
+                } catch(e) {
+                    console.error("User data load error, resetting...", e);
+                }
+            }
+        }
+
+        // TAB SWITCHER
+        function switchTab(tabName) {
+            // Hide all views
+            document.getElementById('view-lexikon').classList.add('hidden');
+            document.getElementById('view-constructor').classList.add('hidden');
+            document.getElementById('view-deconstructor').classList.add('hidden');
+
+            // Reset tab styles
+            const tabs = ['lexikon', 'constructor', 'deconstructor'];
+            tabs.forEach(t => {
+                const elem = document.getElementById(`tab-${t}`);
+                elem.className = "flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-300";
+            });
+
+            // Show and highlight current active
+            document.getElementById(`view-${tabName}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            
+            if (tabName === 'deconstructor') {
+                activeTab.className = "flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400";
+                generateDeconstructorQuiz();
+            } else if (tabName === 'constructor') {
+                activeTab.className = "flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400";
+                initConstructorPuzzle();
+            } else {
+                activeTab.className = "flex-shrink-0 px-5 py-3 border-b-2 font-medium text-sm flex items-center space-x-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400";
+            }
+        }
+
+        // --- THEME / DARK MODE MANAGER ---
+        function initTheme() {
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                themeToggleLightIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggleDarkIcon.classList.remove('hidden');
+            }
+
+            document.getElementById('theme-toggle').addEventListener('click', function() {
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+        }
+
+        // --- TOAST NOTIFICATIONS ---
+        function showToast(title, sub, type = 'success') {
+            const toast = document.getElementById('custom-toast');
+            const iconBox = document.getElementById('toast-icon-box');
+            document.getElementById('toast-message').innerText = title;
+            document.getElementById('toast-sub-message').innerText = sub;
+
+            if (type === 'success') {
+                iconBox.className = "p-2 rounded-xl text-white bg-emerald-500 shadow-md shadow-emerald-500/20";
+                iconBox.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>`;
+            } else if (type === 'streak') {
+                iconBox.className = "p-2 rounded-xl text-white bg-amber-500 shadow-md shadow-amber-500/20";
+                iconBox.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`;
+            } else {
+                iconBox.className = "p-2 rounded-xl text-white bg-rose-500 shadow-md shadow-rose-500/20";
+                iconBox.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>`;
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // --- LEXIKON (図鑑) CONTROLLERS ---
+        function filterLexikon(type) {
+            const filters = ['all', 'prefix', 'root', 'suffix'];
+            filters.forEach(f => {
+                const btn = document.getElementById(`btn-filter-${f}`);
+                if (f === type) {
+                    btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white dark:bg-brand-500";
+                } else {
+                    btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600";
+                }
+            });
+
+            renderLexikon(type);
+        }
+
+        function renderLexikon(type) {
+            const grid = document.getElementById('lexikon-grid');
+            grid.innerHTML = '';
+
+            let partsToShow = [];
+            if (type === 'all' || type === 'prefix') partsToShow.push(...WORD_PARTS_DATA.prefixes);
+            if (type === 'all' || type === 'suffix') partsToShow.push(...WORD_PARTS_DATA.suffixes);
+            if (type === 'all' || type === 'root') partsToShow.push(...WORD_PARTS_DATA.roots);
+
+            partsToShow.forEach(part => {
+                const isMastered = userData.masteredParts.includes(part.id);
+                const card = document.createElement('div');
+                card.onclick = () => inspectPart(part.id);
+                card.className = `part-card p-4 rounded-2xl bg-white dark:bg-stone-800 border transition-all cursor-pointer flex flex-col justify-between hover:shadow-lg ${
+                    isMastered 
+                        ? 'border-brand-300 dark:border-brand-800 bg-brand-50/20 dark:bg-brand-950/5' 
+                        : 'border-stone-200 dark:border-stone-800'
+                }`;
+
+                let badgeColor = "bg-stone-100 text-stone-700 dark:bg-stone-700 dark:text-stone-300";
+                let typeName = "語根";
+                if (part.type === 'prefix') {
+                    badgeColor = "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300";
+                    typeName = "接頭辞";
+                } else if (part.type === 'suffix') {
+                    badgeColor = "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300";
+                    typeName = "接尾辞";
+                }
+
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeColor}">${typeName}</span>
+                            <div class="flex items-center space-x-1">
+                                ${isMastered ? '<span class="text-xs">🏆</span>' : ''}
+                                <span class="text-[10px] font-mono font-bold text-stone-400 dark:text-stone-500">${part.level}</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-stone-900 dark:text-white font-mono">${part.text}</h4>
+                        <p class="text-xs text-stone-600 dark:text-stone-300 line-clamp-2">${part.mean}</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-stone-100 dark:border-stone-700/50 flex justify-between items-center text-[10px] text-stone-400">
+                        <span>例: ${part.examples?.[0]?.word || ''}</span>
+                        <span class="text-brand-500 dark:text-brand-400 font-bold hover:underline">分析をみる →</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Inspect and display single part detail on right-hand panel
+        function inspectPart(partId) {
+            let part = null;
+            // Seek in prefixes, suffixes, roots
+            part = WORD_PARTS_DATA.prefixes.find(p => p.id === partId) || 
+                   WORD_PARTS_DATA.suffixes.find(p => p.id === partId) || 
+                   WORD_PARTS_DATA.roots.find(p => p.id === partId);
+
+            if (!part) return;
+
+            document.getElementById('inspector-placeholder').classList.add('hidden');
+            const content = document.getElementById('inspector-content');
+            content.classList.remove('hidden');
+
+            // Set badge
+            const badge = document.getElementById('inspector-badge');
+            let badgeStyle = "bg-stone-100 text-stone-700 dark:bg-stone-700 dark:text-stone-300";
+            let typeLabel = "語根 (Stamm)";
+            if (part.type === 'prefix') {
+                badgeStyle = "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300";
+                typeLabel = "接頭辞 (Präfix)";
+            } else if (part.type === 'suffix') {
+                badgeStyle = "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300";
+                typeLabel = "接尾辞 (Suffix)";
+            }
+            badge.className = `inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 ${badgeStyle}`;
+            badge.innerText = typeLabel;
+
+            // Fill text fields
+            document.getElementById('inspector-text').innerText = part.text;
+            document.getElementById('inspector-level').innerText = part.level;
+            document.getElementById('inspector-mean').innerText = part.mean;
+            document.getElementById('inspector-desc').innerText = part.desc;
+
+            // Render detailed equations / build structures
+            const examplesContainer = document.getElementById('inspector-examples');
+            examplesContainer.innerHTML = '';
+
+            if (part.examples && part.examples.length > 0) {
+                part.examples.forEach(ex => {
+                    const exRow = document.createElement('div');
+                    exRow.className = "p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-xl space-y-1.5";
+                    exRow.innerHTML = `
+                        <div class="flex justify-between items-center font-mono">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 text-sm">${ex.word}</span>
+                            <span class="text-[10px] text-stone-400">${ex.break}</span>
+                        </div>
+                        <p class="text-[11px] text-stone-600 dark:text-stone-300">${ex.mean}</p>
+                    `;
+                    examplesContainer.appendChild(exRow);
+                });
+            } else {
+                examplesContainer.innerHTML = `<span class="text-stone-400 text-xs italic">ビルド例が登録されていません。</span>`;
+            }
+        }
+
+        // --- GAME 1: PUZZLE CONSTRUCTOR ---
+        function initConstructorPuzzle() {
+            // Select a random game card
+            const randomIndex = Math.floor(Math.random() * WORD_GAME_DATA.length);
+            currentPuzzleWord = WORD_GAME_DATA[randomIndex];
+            puzzleSelectedParts = [];
+
+            // Render Prompt UI
+            document.getElementById('puzzle-target-mean').innerText = currentPuzzleWord.mean;
+            document.getElementById('puzzle-target-hint').innerText = currentPuzzleWord.hint;
+
+            // Clean previous slot items
+            renderPuzzleAssembly();
+
+            // Prepare dynamic tiles including incorrect distractors
+            const optionsZone = document.getElementById('puzzle-options-zone');
+            optionsZone.innerHTML = '';
+
+            // Put correct parts
+            let activePool = [...currentPuzzleWord.parts];
+
+            // Mix distractors (take some other keys from prefix/suffix/roots)
+            const distractorPool = [];
+            const allDatabaseParts = [
+                ...WORD_PARTS_DATA.prefixes.map(p => p.text.replace('-', '')),
+                ...WORD_PARTS_DATA.suffixes.map(s => s.text.replace('-', '')),
+                ...WORD_PARTS_DATA.roots.map(r => r.text)
+            ];
+
+            while (distractorPool.length < 3) {
+                const randPart = allDatabaseParts[Math.floor(Math.random() * allDatabaseParts.length)];
+                if (!activePool.includes(randPart) && !distractorPool.includes(randPart)) {
+                    distractorPool.push(randPart);
+                }
+            }
+
+            // Combine correct & distractors and shuffle
+            const gameTiles = [...activePool, ...distractorPool];
+            shuffleArray(gameTiles);
+
+            gameTiles.forEach((tileText, idx) => {
+                const tileBtn = document.createElement('button');
+                tileBtn.onclick = () => selectPuzzleTile(tileText, tileBtn);
+                tileBtn.className = "px-4 py-2 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md rounded-xl text-sm font-mono font-bold transition-all duration-200";
+                tileBtn.innerText = tileText;
+                tileBtn.setAttribute('data-index', idx);
+                optionsZone.appendChild(tileBtn);
+            });
+        }
+
+        function selectPuzzleTile(partText, buttonElem) {
+            puzzleSelectedParts.push(partText);
+            buttonElem.disabled = true;
+            buttonElem.classList.add('opacity-30', 'scale-90', 'pointer-events-none');
+            renderPuzzleAssembly();
+        }
+
+        function renderPuzzleAssembly() {
+            const assemblyZone = document.getElementById('puzzle-assembly-zone');
+            assemblyZone.innerHTML = '';
+
+            if (puzzleSelectedParts.length === 0) {
+                assemblyZone.innerHTML = `<span class="text-xs text-stone-400 italic">ここに組み立てられます（タイルを選択してください）</span>`;
+                return;
+            }
+
+            puzzleSelectedParts.forEach((part, index) => {
+                const badge = document.createElement('div');
+                badge.className = "px-3.5 py-1.5 bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 rounded-xl text-sm font-mono font-bold flex items-center space-x-1 shadow-sm";
+                badge.innerHTML = `
+                    <span>${part}</span>
+                    <button onclick="removeSelectedPuzzlePart(${index})" class="ml-1 hover:text-brand-950 dark:hover:text-white transition-colors" aria-label="取り消し">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                `;
+                assemblyZone.appendChild(badge);
+            });
+        }
+
+        function removeSelectedPuzzlePart(index) {
+            const removedPart = puzzleSelectedParts.splice(index, 1)[0];
+            renderPuzzleAssembly();
+
+            // Reactivate corresponding tile button
+            const optionButtons = document.getElementById('puzzle-options-zone').querySelectorAll('button');
+            for (let btn of optionButtons) {
+                if (btn.innerText === removedPart && btn.disabled) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-30', 'scale-90', 'pointer-events-none');
+                    break;
+                }
+            }
+        }
+
+        function clearPuzzleAssembly() {
+            puzzleSelectedParts = [];
+            renderPuzzleAssembly();
+            
+            // Reactivate all option buttons
+            const optionButtons = document.getElementById('puzzle-options-zone').querySelectorAll('button');
+            optionButtons.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('opacity-30', 'scale-90', 'pointer-events-none');
+            });
+        }
+
+        function checkPuzzleAnswer() {
+            const userBuild = puzzleSelectedParts.join('').toLowerCase();
+            const correctCombination = currentPuzzleWord.parts.join('').toLowerCase();
+            const alternateBuild = currentPuzzleWord.word.toLowerCase(); // Full combined target check
+
+            userData.stats.totalAnswers += 1;
+
+            const assemblyZone = document.getElementById('puzzle-assembly-zone');
+
+            if (userBuild === correctCombination || userBuild === alternateBuild) {
+                // CORRECT ANSWER
+                userData.stats.correctAnswers += 1;
+                userData.stats.constructorStreak += 1;
+                
+                // Track current score
+                const gain = 10 + (userData.stats.constructorStreak * 2);
+                userData.stats.constructorScore += gain;
+
+                // Animate success
+                assemblyZone.classList.add('bounce-animation', 'border-emerald-500', 'bg-emerald-50/20');
+                showToast("Sehr gut! 正解です", `単語「${currentPuzzleWord.word}」のビルドに成功しました！ (+${gain} pts)`, "success");
+
+                // Discover and unlock part in Lexikon
+                unlockWordParts(currentPuzzleWord.parts);
+
+                setTimeout(() => {
+                    assemblyZone.classList.remove('bounce-animation', 'border-emerald-500', 'bg-emerald-50/20');
+                    initConstructorPuzzle();
+                    updateStatsUI();
+                }, 1500);
+
+            } else {
+                // INCORRECT ANSWER
+                userData.stats.constructorStreak = 0;
+                assemblyZone.classList.add('shake-animation', 'border-rose-500', 'bg-rose-50/20');
+                showToast("Falsch! 残念", "組み合わせが違います。もう一度試してみましょう！", "error");
+
+                setTimeout(() => {
+                    assemblyZone.classList.remove('shake-animation', 'border-rose-500', 'bg-rose-50/20');
+                    updateStatsUI();
+                }, 1000);
+            }
+            saveUserData();
+        }
+
+        // --- GAME 2: DECONSTRUCTOR (分解クイズ) ---
+        function generateDeconstructorQuiz() {
+            // Select random target
+            const randIndex = Math.floor(Math.random() * WORD_GAME_DATA.length);
+            currentDeconWord = WORD_GAME_DATA[randIndex];
+
+            document.getElementById('decon-word-display').innerText = currentDeconWord.word;
+            document.getElementById('decon-word-mean').innerText = `日本語の意味: ${currentDeconWord.mean}`;
+
+            // Create Choices (1 Correct, 3 Distractors)
+            const choices = [];
+            const correctText = currentDeconWord.parts.join(' + ');
+            choices.push(correctText);
+
+            // Fetch other formulas to mix
+            while (choices.length < 4) {
+                const otherWord = WORD_GAME_DATA[Math.floor(Math.random() * WORD_GAME_DATA.length)];
+                const otherText = otherWord.parts.join(' + ');
+                if (!choices.includes(otherText)) {
+                    choices.push(otherText);
+                }
+            }
+
+            shuffleArray(choices);
+
+            // Render buttons
+            const container = document.getElementById('decon-choices-container');
+            container.innerHTML = '';
+
+            choices.forEach(formulaText => {
+                const btn = document.createElement('button');
+                btn.onclick = () => submitDeconstructorAnswer(formulaText, btn);
+                btn.className = "p-4 bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700/60 text-left border border-stone-200 dark:border-stone-700 hover:border-indigo-500 dark:hover:border-indigo-400 rounded-2xl text-xs sm:text-sm font-mono font-medium flex items-center justify-between transition-all duration-200 shadow-sm";
+                btn.innerHTML = `
+                    <span>${formulaText}</span>
+                    <span class="text-stone-400">→</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function submitDeconstructorAnswer(selectedText, buttonElem) {
+            const correctText = currentDeconWord.parts.join(' + ');
+            userData.stats.totalAnswers += 1;
+
+            const choiceButtons = document.getElementById('decon-choices-container').querySelectorAll('button');
+            choiceButtons.forEach(btn => btn.disabled = true); // Lock multiple clicks
+
+            if (selectedText === correctText) {
+                userData.stats.correctAnswers += 1;
+                buttonElem.className = "p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500 dark:border-emerald-500 text-emerald-800 dark:text-emerald-300 rounded-2xl text-xs sm:text-sm font-mono font-bold flex items-center justify-between shadow-md";
+                buttonElem.innerHTML = `
+                    <span>🎉 ${selectedText} (正解!)</span>
+                    <span>✓</span>
+                `;
+                showToast("Ausgezeichnet! 正解", "語構成パーツの分解に成功しました！", "success");
+                
+                // Unlock part in Mastered List
+                unlockWordParts(currentDeconWord.parts);
+
+                setTimeout(() => {
+                    generateDeconstructorQuiz();
+                    updateStatsUI();
+                }, 1500);
+            } else {
+                buttonElem.className = "p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-500 dark:border-rose-500 text-rose-800 dark:text-rose-300 rounded-2xl text-xs sm:text-sm font-mono font-bold flex items-center justify-between shadow-md";
+                buttonElem.innerHTML = `
+                    <span>✘ ${selectedText} (間違い)</span>
+                    <span>✗</span>
+                `;
+
+                // Highlight correct one subtly
+                choiceButtons.forEach(btn => {
+                    if (btn.innerText.startsWith(correctText)) {
+                        btn.className = "p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-500 dark:border-emerald-600/40 text-emerald-700 dark:text-emerald-400 rounded-2xl text-xs sm:text-sm font-mono font-bold flex items-center justify-between";
+                    }
+                });
+
+                showToast("Leider falsch... 残念", `正解は [${correctText}] でした！`, "error");
+
+                setTimeout(() => {
+                    generateDeconstructorQuiz();
+                    updateStatsUI();
+                }, 2200);
+            }
+            saveUserData();
+        }
+
+        // --- STATS & MASTERED CONTROLLERS ---
         function updateStatsUI() {
             document.getElementById('stats-total-answers').innerText = userData.stats.totalAnswers;
             
@@ -102,27 +995,73 @@
                 constScoreElem.innerText = userData.stats.constructorScore;
             }
 
+            const constStreakElem = document.getElementById('const-current-streak');
+            if (constStreakElem) {
+                constStreakElem.innerText = userData.stats.constructorStreak;
+            }
+
             // Total unique parts is 7 (prefixes) + 7 (suffixes) + 8 (roots) = 22
             document.getElementById('header-progress-count').innerText = `${userData.masteredParts.length} / 22`;
+            document.getElementById('master-badge-ratio').innerText = `${userData.masteredParts.length}/22`;
         }
 
-        // Theme Initialization & Management
-<!-- ... existing code ... -->
-    <!-- FOOTER -->
-    <footer class="bg-white dark:bg-stone-800 border-t border-stone-200 dark:border-stone-700 py-6 mt-12 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-            <p class="text-sm text-stone-500 dark:text-stone-400">
-                © 2026 Deutsch Wortbausteine Akademie. ドイツ語初学者(A1-A2)向けの語構成学習ツール。
-            </p>
-            <div class="flex justify-center space-x-4 text-xs text-stone-400 dark:text-stone-500">
-                <span>接頭辞(Präfixe) 7種類</span>
-                <span>•</span>
-                <span>接尾辞(Suffixe) 7種類</span>
-                <span>•</span>
-                <span>語根(Wortstämme) 8種類</span>
-            </div>
-        </div>
-    </footer>
+        function unlockWordParts(partsTextArray) {
+            let newlyMastered = false;
 
-    <script>
-<!-- ... existing code ... -->
+            partsTextArray.forEach(partText => {
+                // Find matching part object in prefixes, suffixes, or roots
+                const partObj = 
+                    WORD_PARTS_DATA.prefixes.find(p => p.text.replace('-', '') === partText.toLowerCase()) ||
+                    WORD_PARTS_DATA.suffixes.find(s => s.text.replace('-', '') === partText.toLowerCase()) ||
+                    WORD_PARTS_DATA.roots.find(r => r.text === partText.toLowerCase());
+
+                if (partObj && !userData.masteredParts.includes(partObj.id)) {
+                    userData.masteredParts.push(partObj.id);
+                    newlyMastered = true;
+                }
+            });
+
+            if (newlyMastered) {
+                updateMasteredPartsUI();
+                renderLexikon('all'); // Refresh master indicator stars
+            }
+        }
+
+        function updateMasteredPartsUI() {
+            const container = document.getElementById('mastered-parts-container');
+            container.innerHTML = '';
+
+            if (userData.masteredParts.length === 0) {
+                container.className = "text-center py-6 text-xs text-stone-400 italic bg-stone-50 dark:bg-stone-900/40 rounded-2xl border border-dashed border-stone-200 dark:border-stone-800 w-full";
+                container.innerText = "まだ習得したパーツがありません。クイズに答えて開放しましょう！";
+                return;
+            }
+
+            container.className = "flex flex-wrap gap-2 items-center";
+
+            userData.masteredParts.forEach(partId => {
+                const part = 
+                    WORD_PARTS_DATA.prefixes.find(p => p.id === partId) || 
+                    WORD_PARTS_DATA.suffixes.find(s => s.id === partId) || 
+                    WORD_PARTS_DATA.roots.find(r => r.id === partId);
+
+                if (part) {
+                    const badge = document.createElement('span');
+                    badge.onclick = () => inspectPart(part.id);
+                    badge.className = "cursor-pointer px-2.5 py-1 text-xs font-mono font-bold bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/30 dark:hover:bg-brand-950/60 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 rounded-lg shadow-sm transition-all";
+                    badge.innerHTML = `🏆 ${part.text}`;
+                    container.appendChild(badge);
+                }
+            });
+        }
+
+        // Helper Utility: Shuffle lists randomly
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    </script>
+</body>
+</html>
