@@ -83,7 +83,7 @@
                 <!-- Progress Mini Widget -->
                 <div class="flex items-center bg-stone-100 dark:bg-stone-800 px-3 py-1.5 rounded-lg text-xs font-medium space-x-2">
                     <span class="text-stone-500 dark:text-stone-400 hidden sm:inline">習得パーツ:</span>
-                    <span id="header-progress-count" class="text-brand-600 dark:text-brand-400 font-bold">0 / 22</span>
+                    <span id="header-progress-count" class="text-brand-600 dark:text-brand-400 font-bold">0 / 32</span>
                 </div>
                 
                 <!-- Dark Mode Toggle -->
@@ -164,16 +164,16 @@
                     <div class="flex flex-wrap gap-2 items-center bg-white dark:bg-stone-800 p-3 rounded-2xl border border-stone-200 dark:border-stone-800">
                         <span class="text-xs font-semibold text-stone-400 uppercase tracking-wider px-2">フィルター:</span>
                         <button onclick="filterLexikon('all')" id="btn-filter-all" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white dark:bg-brand-500">
-                            すべて (22)
+                            すべて (32)
                         </button>
                         <button onclick="filterLexikon('prefix')" id="btn-filter-prefix" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600">
-                            接頭辞 (7)
+                            接頭辞 (11)
                         </button>
                         <button onclick="filterLexikon('root')" id="btn-filter-root" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600">
-                            語根 (8)
+                            語根 (12)
                         </button>
                         <button onclick="filterLexikon('suffix')" id="btn-filter-suffix" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600">
-                            接尾辞 (7)
+                            接尾辞 (9)
                         </button>
                     </div>
 
@@ -311,7 +311,7 @@
                 <div class="bg-white dark:bg-stone-800 p-6 rounded-3xl border border-stone-200 dark:border-stone-800 space-y-4">
                     <div class="flex justify-between items-center border-b border-stone-100 dark:border-stone-700 pb-3">
                         <h3 class="text-sm font-bold text-stone-900 dark:text-white">🏆 習得パーツバッジ</h3>
-                        <span id="master-badge-ratio" class="text-xs font-semibold text-brand-600 dark:text-brand-400">0/22</span>
+                        <span id="master-badge-ratio" class="text-xs font-semibold text-brand-600 dark:text-brand-400">0/32</span>
                     </div>
                     <div id="mastered-parts-container" class="flex flex-wrap gap-1.5 min-h-[40px] items-center text-xs text-stone-400">
                         まだ習得したパーツがありません。クイズやパズルをクリアしてパーツをマスターしましょう！
@@ -338,30 +338,35 @@
     <footer class="bg-white dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800 py-6 mt-12 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
             <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400">
-                © 2026 Deutsch Wortbausteine Akademie. ドイツ語初学者(A1-A2)向けの語構成・結合学習ツール。
+                © 2026 Deutsch Wortbausteine Akademie. ドイツ語初学者(A1-A2)向けの分離動詞・語構成学習ツール。
             </p>
             <div class="flex justify-center space-x-4 text-[10px] sm:text-xs text-stone-400 dark:text-stone-500">
-                <span>接頭辞(Präfixe) 7種類</span>
+                <span>接頭辞(Präfixe) 11種類</span>
                 <span>•</span>
-                <span>接尾辞(Suffixe) 7種類</span>
+                <span>接尾辞(Suffixe) 9種類</span>
                 <span>•</span>
-                <span>語根(Wortstämme) 8種類</span>
+                <span>語根(Wortstämme) 12種類</span>
             </div>
         </div>
     </footer>
 
     <!-- LOGIC SCRIPT -->
     <script>
-        // CEFR A1-A2 Level German Word Parts Database (Wortbausteine) - 22 Parts in Total
+        // CEFR A1-A2 Level German Word Parts Database (Wortbausteine) - 32 Parts in Total
         const WORD_PARTS_DATA = {
             prefixes: [
-                { id: "gp-un", text: "un-", type: "prefix", mean: "非〜、不〜（否定・反対）", level: "A1", desc: "形容詞や名詞の頭について「反対の意味」や「否定」を付与します。", examples: [{ word: "unglücklich", break: "un + glücklich(幸せな)", mean: "不幸せな (A1)" }, { word: "unfreundlich", break: "un + freundlich(親切な)", mean: "不親切な (A1)" }, { word: "unwichtig", break: "un + wichtig(重要な)", mean: "重要でない (A2)" }] },
+                { id: "gp-un", text: "un-", type: "prefix", mean: "非〜、不〜（否定・反対）", level: "A1", desc: "形容詞や名詞の頭について「反対の意味」や「否定」を付与します。", examples: [{ word: "unglücklich", break: "un + glücklich(幸せな)", mean: "不幸せな (A1)" }, { word: "unfreundlich", break: "un + freundlich(親切な)", mean: "不親切な (A1)" }, { word: "unwichtig", break: "un +重要", mean: "重要でない (A2)" }] },
                 { id: "gp-be", text: "be-", type: "prefix", mean: "（他動詞化、対象への作用）", level: "A1", desc: "主に自動詞を他動詞化し、行為を具体的な対象へと向けます。非分離接頭辞（切り離せないパーツ）です。", examples: [{ word: "bezahlen", break: "be + zahlen(支払う)", mean: "〜を支払う (A1)" }, { word: "beantworten", break: "be + antworten(答える)", mean: "（質問に）答える (A1)" }, { word: "beschreiben", break: "be + schreiben(書く)", mean: "説明・描写する (A2)" }] },
                 { id: "gp-ver", text: "ver-", type: "prefix", mean: "変化、完了、間違い、反対", level: "A2", desc: "状態の変化、物事の完了、あるいは「間違えて〜する（やり損ねる）」などの意味を加えます。非分離接頭辞です。", examples: [{ word: "verkaufen", break: "ver + kaufen(買う)", mean: "売る (A1)" }, { word: "verreisen", break: "ver + reisen(旅行する)", mean: "旅に出る (A2)" }, { word: "versprechen", break: "ver + sprechen(話す)", mean: "約束する (A2)" }] },
                 { id: "gp-mit", text: "mit-", type: "prefix", mean: "一緒に、共同で（分離）", level: "A1", desc: "動詞の頭につき、「共同して行う」や「同行する」の意味を作ります。文中で切り離される「分離接頭辞」です。", examples: [{ word: "mitbringen", break: "mit + bringen(持ってくる)", mean: "持参する (A1)" }, { word: "mitkommen", break: "mit + kommen(来る)", mean: "一緒に行く/来る (A1)" }, { word: "mitarbeiten", break: "mit + arbeiten(働く)", mean: "共同で働く (A2)" }] },
                 { id: "gp-ge", text: "ge-", type: "prefix", mean: "集合、または動作の連帯", level: "A2", desc: "名詞について「〜の集まり」を表したり、過去分詞だけでなく、独自の意味を持つ名詞・動詞を形成します。", examples: [{ word: "Geschwister", break: "ge + Schwester/Bruder", mean: "兄弟姉妹 (A1)" }, { word: "gefallen", break: "ge + fallen(落ちる)", mean: "気に入る (A1)" }] },
-                { id: "gp-ein", text: "ein-", type: "prefix", mean: "中へ、導入（分離）", level: "A1", desc: "動作が「中に入る」ことや、新しく何かを始める方向性を加えます。分離接頭辞です。", examples: [{ word: "einkaufen", break: "ein + kaufen(買う)", mean: "買い物をする (A1)" }, { word: "einladen", break: "ein + laden(積む/誘う)", mean: "招待する (A2)" }, { word: "einsteigen", break: "ein + steigen(登る)", mean: "（乗り物に）乗車する (A2)" }] },
-                { id: "gp-aus", text: "aus-", type: "prefix", mean: "外へ、終了（分離）", level: "A1", desc: "動作が「外へ向かう」ことや、「完全に終わらせる」ことを表します。分離接頭辞です。", examples: [{ word: "ausgehen", break: "aus + gehen(行く)", mean: "外出する、遊びに行く (A1)" }, { word: "ausfüllen", break: "aus + füllen(満たす)", mean: "（書類に）記入する (A2)" }, { word: "aussteigen", break: "aus + steigen", mean: "下車する (A2)" }] }
+                { id: "gp-ein", text: "ein-", type: "prefix", mean: "中へ、導入（分離）", level: "A1", desc: "動作が「中に入る」ことや、新しく何かを始める方向性を加えます。分離接頭辞です。", examples: [{ word: "einkaufen", break: "ein + kaufen(買う)", mean: "買い物をする (A1)" }, { word: "einladen", break: "ein + laden(誘う)", mean: "招待する (A2)" }, { word: "einsteigen", break: "ein + steigen(登る)", mean: "（乗り物に）乗車する (A2)" }] },
+                { id: "gp-aus", text: "aus-", type: "prefix", mean: "外へ、終了（分離）", level: "A1", desc: "動作が「外へ向かう」ことや、「完全に終わらせる」ことを表します。分離接頭辞です。", examples: [{ word: "ausgehen", break: "aus + gehen(行く)", mean: "外出する、遊びに行く (A1)" }, { word: "ausfüllen", break: "aus + füllen(満たす)", mean: "（書類に）記入する (A2)" }, { word: "aussteigen", break: "aus + steigen", mean: "下車する (A2)" }] },
+                // NEW: SEPARABLE PREFIXES (分離接頭辞追加)
+                { id: "gp-auf", text: "auf-", type: "prefix", mean: "上へ、開く、開始（分離）", level: "A1", desc: "「上への移動」や「閉じていたものを開ける動作」、あるいは「新しい動作の開始」を表す分離接頭辞です。", examples: [{ word: "aufstehen", break: "auf + stehen(立つ)", mean: "起立する、起床する (A1)" }, { word: "aufmachen", break: "auf + machen(する/作る)", mean: "（本やドアを)開ける (A1)" }, { word: "aufhören", break: "auf + hören(聞く)", mean: "やめる、終止する (A2)" }] },
+                { id: "gp-an", text: "an-", type: "prefix", mean: "接触、開始、目標（分離）", level: "A1", desc: "動作がある目標物に「接触する」ことや、「活動を開始する」方向性を表します。分離接頭辞です。", examples: [{ word: "ankommen", break: "an + kommen(来る)", mean: "到着する (A1)" }, { word: "anrufen", break: "an + rufen(呼ぶ)", mean: "電話をかける (A1)" }, { word: "anfangen", break: "an + fangen(捕まえる)", mean: "始める、開始する (A1)" }] },
+                { id: "gp-ab", text: "ab-", type: "prefix", mean: "離脱、出発、下方（分離）", level: "A2", desc: "「その場所から離れる」「移動を始める」といった出発・取り外しの動作を意味します。分離接頭辞です。", examples: [{ word: "abfahren", break: "ab + fahren(行く/乗る)", mean: "出発する (A1)" }, { word: "abgeben", break: "ab + geben(与える)", mean: "提出する、手渡す (A2)" }, { word: "absagen", break: "ab + sagen(言う)", mean: "断る、キャンセルする (A2)" }] },
+                { id: "gp-zu", text: "zu-", type: "prefix", mean: "閉鎖、方向、追加（分離）", level: "A2", desc: "「閉じる動き」や、「ある対象にしっかりと向かっていく」ニュアンスを表します。分離接頭辞です。", examples: [{ word: "zumachen", break: "zu + machen", mean: "閉める、閉じる (A1)" }, { word: "zuhören", break: "zu + hören", mean: "（注意して）耳を傾ける (A2)" }, { word: "zunehmen", break: "zu + nehmen(取る)", mean: "増える、体重が増す (A2)" }] }
             ],
             suffixes: [
                 { id: "gs-er", text: "-er", type: "suffix", mean: "〜する人、〜の男（職業・役割）", level: "A1", desc: "動詞の語幹について、その動作を行う「男性（人）」を表す男性名詞を作ります。※名詞なので大文字で始まります。", examples: [{ word: "Lehrer", break: "lehr(教える) + er", mean: "男性教師 (A1)" }, { word: "Spieler", break: "spiel(遊ぶ) + er", mean: "選手、男性プレイヤー (A1)" }, { word: "Käufer", break: "kauf(買う) + er", mean: "買い手、顧客 (A2)" }] },
@@ -370,7 +375,10 @@
                 { id: "gs-lich", text: "-lich", type: "suffix", mean: "〜のような、〜的な（形容詞化）", level: "A1", desc: "名詞や動詞について「〜らしい」「〜の性質を持った」という形容詞を作ります。英語の -ly に相当します。", examples: [{ word: "freundlich", break: "Freund(友) + lich", mean: "親切な (A1)" }, { word: "täglich", break: "Tag(日) + lich", mean: "毎日の (A2)" }, { word: "pünktlich", break: "Punkt(点) + lich", mean: "時間厳守の (A1)" }] },
                 { id: "gs-los", text: "-los", type: "suffix", mean: "〜のない、欠いている（形容詞化）", level: "A2", desc: "名詞の後ろについて「〜がない」という形容詞を作ります。英語の -less に相当します。", examples: [{ word: "arbeitslos", break: "Arbeit(労働) + los", mean: "失業した (A2)" }, { word: "kinderlos", break: "Kinder(子供たち) + los", mean: "子供のいない (A2)" }] },
                 { id: "gs-heit", text: "-heit / -keit", type: "suffix", mean: "〜なこと、〜さ（形容詞の名詞化）", level: "A2", desc: "形容詞の後ろにつき、抽象的な概念や状態を表す女性名詞を作ります。語尾により -heit と -keit を使い分けます。", examples: [{ word: "Krankheit", break: "krank(病気の) + heit", mean: "病気 (A2)" }, { word: "Freiheit", break: "frei(自由な) + heit", mean: "自由 (A2)" }, { word: "Schnelligkeit", break: "schnell(速い) + keit", mean: "迅速さ、速さ (A2)" }] },
-                { id: "gs-bar", text: "-bar", type: "suffix", mean: "〜できる（可能・形容詞化）", level: "A2", desc: "動詞の語幹について「〜できる」「〜可能な」という形容詞を作ります。英語の -able に相当します。", examples: [{ word: "trinkbar", break: "trink(飲む) + bar", mean: "飲用可能な (A2)" }, { word: "machbar", break: "mach(する) + bar", mean: "実現可能な (A2)" }, { word: "wunderbar", break: "Wunder(奇跡) + bar", mean: "素晴らしい (A1)" }] }
+                { id: "gs-bar", text: "-bar", type: "suffix", mean: "〜できる（可能・形容詞化）", level: "A2", desc: "動詞の語幹について「〜できる」「〜可能な」という形容詞を作ります。英語の -able に相当します。", examples: [{ word: "trinkbar", break: "trink(飲む) + bar", mean: "飲用可能な (A2)" }, { word: "machbar", break: "mach(する) + bar", mean: "実現可能な (A2)" }, { word: "wunderbar", break: "Wunder(奇跡) + bar", mean: "素晴らしい (A1)" }] },
+                // NEW: SUFFIXES (接尾辞追加)
+                { id: "gs-isch", text: "-isch", type: "suffix", mean: "〜の、〜的な、国籍（形容詞化）", level: "A1", desc: "国名についてその国の言語や人を表す形容詞を作ったり、名詞を「〜風の、〜的な」性質の形容詞にします。", examples: [{ word: "japanisch", break: "Japan + isch", mean: "日本の、日本語の (A1)" }, { word: "praktisch", break: "Prakt(経験) + isch", mean: "実用的な、便利な (A2)" }, { word: "typisch", break: "Typ + isch", mean: "典型的な (A2)" }] },
+                { id: "gs-schaft", text: "-schaft", type: "suffix", mean: "集団、関係、状態（名詞化）", level: "A2", desc: "人と人の結びつきや集団のまとまり、社会的なステータスを表す女性名詞を形作ります。", examples: [{ word: "Freundschaft", break: "Freund(友人) + schaft", mean: "友情 (A2)" }, { word: "Nachbarschaft", break: "Nachbar(隣人) + schaft", mean: "近隣、近所 (A2)" }, { word: "Mannschaft", break: "Mann(男/人) + schaft", mean: "スポーツチーム、乗組員 (A2)" }] }
             ],
             roots: [
                 { id: "gr-fahr", text: "fahr", type: "root", mean: "行く、乗る、移動する", level: "A1", desc: "乗り物に乗って移動することに関連する、ドイツ語で最も基本となる語根の一つです。", examples: [{ word: "fahren", break: "fahr + en", mean: "行く、運転する (A1)" }, { word: "Fahrrad", break: "fahr + Rad(車輪)", mean: "自転車 (A1)" }, { word: "Fahrer", break: "fahr + er", mean: "運転手 (A1)" }] },
@@ -380,11 +388,16 @@
                 { id: "gr-sprech", text: "sprech", type: "root", mean: "話す、発言する", level: "A1", desc: "声に出して会話をすることに関連する基本語根。名詞化する際は Spr- や -spräch に変化することがあります。", examples: [{ word: "sprechen", break: "sprech + en", mean: "話す (A1)" }, { word: "Sprache", break: "Sprache", mean: "言語 (A1)" }, { word: "Gespräch", break: "ge + spräch", mean: "会話 (A2)" }] },
                 { id: "gr-kauf", text: "kauf", type: "root", mean: "買う、取引する", level: "A1", desc: "売買取引や買い物に関連する概念を持つ語根です。", examples: [{ word: "kaufen", break: "kauf + en", mean: "買う (A1)" }, { word: "verkaufen", break: "ver + kaufen", mean: "売る (A1)" }, { word: "Einkauf", break: "ein + kauf", mean: "買い物 (A1)" }] },
                 { id: "gr-komm", text: "komm", type: "root", mean: "来る、到達する", level: "A1", desc: "「来る」という中核の動作を表す語根。様々な分離接頭辞と結合してバリエーションを作ります。", examples: [{ word: "kommen", break: "komm + en", mean: "来る (A1)" }, { word: "mitkommen", break: "mit + kommen", mean: "一緒に行く/来る (A1)" }, { word: "ankommen", break: "an + kommen", mean: "到着する (A1)" }] },
-                { id: "gr-mach", text: "mach", type: "root", mean: "する、作る、行う", level: "A1", desc: "英語の make や do に相当する、極めて応用範囲の広いドイツ語の基本語根です。", examples: [{ word: "machen", break: "mach + en", mean: "する、作る (A1)" }, { word: "mitmachen", break: "mit + machen", mean: "参加する (A2)" }, { word: "aufmachen", break: "auf + machen", mean: "開ける (A1)" }] }
+                { id: "gr-mach", text: "mach", type: "root", mean: "する、作る、行う", level: "A1", desc: "英語の make や do に相当する、極めて応用範囲の広いドイツ語の基本語根です。", examples: [{ word: "machen", break: "mach + en", mean: "する、作る (A1)" }, { word: "mitmachen", break: "mit + machen", mean: "参加する (A2)" }, { word: "aufmachen", break: "auf + machen", mean: "開ける (A1)" }] },
+                // NEW: WORD ROOTS (語根追加)
+                { id: "gr-ruf", text: "ruf", type: "root", mean: "叫ぶ、呼ぶ", level: "A1", desc: "大声で呼ぶ、または電話連絡をすることに関連する重要語根です。", examples: [{ word: "rufen", break: "ruf + en", mean: "叫ぶ、大声で呼ぶ (A1)" }, { word: "anrufen", break: "an + rufen", mean: "電話をかける (A1)" }, { word: "Anruf", break: "An + ruf", mean: "通話、着信 (A1)" }] },
+                { id: "gr-steh", text: "steh", type: "root", mean: "立つ、直立する、存在する", level: "A1", desc: "直立状態、あるいはその場に在ることを表す語根。分離接頭辞がつくことで行動パターンが変化します。", examples: [{ word: "stehen", break: "steh + en", mean: "立っている (A1)" }, { word: "aufstehen", break: "auf + stehen", mean: "起立する、朝起きる (A1)" }, { word: "verstehen", break: "ver + stehen", mean: "理解する (A1)" }] },
+                { id: "gr-nehm", text: "nehm", type: "root", mean: "取る、獲得する", level: "A1", desc: "何かを受け取ったり、選択して我が物にする動作。非常に応用性の高い語根です。", examples: [{ word: "nehmen", break: "nehm + en", mean: "取る、乗る (A1)" }, { word: "mitnehmen", break: "mit + nehmen", mean: "持って行く、連れて行く (A1)" }, { word: "zunehmen", break: "zu + nehmen", mean: "増やす、増加する (A2)" }] },
+                { id: "gr-hör", text: "hör", type: "root", mean: "聴く、従う", level: "A1", desc: "聴覚的に耳を傾ける動作を表す基本語根。接頭辞の方向によって聞く強度が変わります。", examples: [{ word: "hören", break: "hör + en", mean: "聴く、聞こえる (A1)" }, { word: "zuhören", break: "zu + hören", mean: "耳を傾ける (A2)" }, { word: "aufhören", break: "auf + hören", mean: "やめる、終止する (A2)" }] }
             ]
         };
 
-        // Complete list of German words for interactive games (67 elements!)
+        // Complete list of German words for interactive games (81 elements including separation patterns!)
         const WORD_GAME_DATA = [
             // --- PREFIX BASED WORDS ---
             { word: "unglücklich", hint: "「幸せ(glücklich)」ではない、悲しい状態", parts: ["un", "glücklich"], category: "prefix", mean: "不幸せな" },
@@ -433,6 +446,19 @@
             { word: "gefallen", hint: "好みにカチッと落ちて「気に入る」", parts: ["ge", "fallen"], category: "prefix", mean: "気に入る" },
             { word: "Gespräch", hint: "話し合い、おしゃべりの集まり(名詞は大文字スタート)", parts: ["ge", "spräch"], category: "prefix", mean: "会話、対談" },
 
+            // NEW SEPARABLE WORDS
+            { word: "aufmachen", hint: "ドアや窓、本を「開ける(machen)」こと(分離動詞)", parts: ["auf", "machen"], category: "prefix", mean: "開ける、開く" },
+            { word: "aufstehen", hint: "立っていない状態から「立ち上がる、朝起きる」(分離動詞)", parts: ["auf", "stehen"], category: "prefix", mean: "起立する、起床する" },
+            { word: "aufhören", hint: "続いていた雨や仕事などの動きを「やめる、ストップする」(分離動詞)", parts: ["auf", "hören"], category: "prefix", mean: "やめる、終止する" },
+            { word: "ankommen", hint: "旅路を終えて目的地に「到着する(kommen)」(分離動詞)", parts: ["an", "kommen"], category: "prefix", mean: "到着する" },
+            { word: "anrufen", hint: "電話で相手に「発信して呼び出す(rufen)」(分離動詞)", parts: ["an", "rufen"], category: "prefix", mean: "電話をかける" },
+            { word: "anfangen", hint: "新しい作業や授業を「始める」(分離動詞)", parts: ["an", "fangen"], category: "prefix", mean: "始める、開始する" },
+            { word: "abfahren", hint: "駅や停留所から電車・車が「出発する(fahren)」(分離動詞)", parts: ["ab", "fahren"], category: "prefix", mean: "出発する" },
+            { word: "abgeben", hint: "宿題や書類を先生・受付に「提出する(geben)」(分離動詞)", parts: ["ab", "geben"], category: "prefix", mean: "提出する、渡す" },
+            { word: "zumachen", hint: "ドアや窓、引き出しを「閉める(machen)」(分離動詞)", parts: ["zu", "machen"], category: "prefix", mean: "閉める、閉じる" },
+            { word: "zuhörern", hint: "先生の解説などを注意深く「耳を傾けて聴く」(分離動詞)", parts: ["zu", "hören"], category: "prefix", mean: "耳を傾ける、聴き入る" },
+            { word: "zunehmen", hint: "重さや量が「増加する、体重が増える」(分離動詞)", parts: ["zu", "nehmen"], category: "prefix", mean: "増える、体重が増す" },
+
             // --- SUFFIX BASED WORDS ---
             { word: "Lehrer", hint: "学校などで教える「男性(lehr + -er)」(名詞は大文字スタート)", parts: ["lehr", "er"], category: "suffix", mean: "男性教師" },
             { word: "Spieler", hint: "ゲームや競技をする「男性(spiel + -er)」(名詞は大文字スタート)", parts: ["spiel", "er"], category: "suffix", mean: "選手、男性プレイヤー" },
@@ -478,7 +504,14 @@
             { word: "machbar", hint: "計画などが「行う(mach)」ことが「できる(-bar)」状態", parts: ["mach", "bar"], category: "suffix", mean: "実現可能な" },
             { word: "wunderbar", hint: "奇跡(Wunder)のような、素晴らしい様子", parts: ["Wunder", "bar"], category: "suffix", mean: "素晴らしい" },
             { word: "essbar", hint: "その植物や食材が「食べる(ess)」ことができる状態", parts: ["ess", "bar"], category: "suffix", mean: "食べられる" },
-            { word: "lesbar", hint: "字がきれいで「読む(les)」ことができる状態", parts: ["les", "bar"], category: "suffix", mean: "判読できる、読みやすい" }
+            { word: "lesbar", hint: "字がきれいで「読む(les)」ことができる状態", parts: ["les", "bar"], category: "suffix", mean: "判読できる、読みやすい" },
+
+            // NEW SUFFIX WORDS
+            { word: "japanisch", hint: "国名「日本(Japan)」の、または「日本語」の(形容詞なので小文字スタート)", parts: ["Japan", "isch"], category: "suffix", mean: "日本の、日本語の" },
+            { word: "praktisch", hint: "「実用的、便利(Prakt)」な様子を表す形容詞", parts: ["Prakt", "isch"], category: "suffix", mean: "実用的な、便利な" },
+            { word: "typisch", hint: "ある「型、グループ(Typ)」の性質を顕著に示す様子", parts: ["Typ", "isch"], category: "suffix", mean: "典型的な" },
+            { word: "Freundschaft", hint: "「友人(Freund)」同士の強い結びつき(名詞は大文字スタート)", parts: ["Freund", "schaft"], category: "suffix", mean: "友情、友好関係" },
+            { word: "Nachbarschaft", hint: "住まいの「隣人(Nachbar)」たちや近所の地域(名詞は大文字スタート)", parts: ["Nachbar", "schaft"], category: "suffix", mean: "近隣、近所" }
         ];
 
         // Global User Session State
@@ -510,11 +543,11 @@
 
         // Save and Load Session Data locally (Simulated)
         function saveUserData() {
-            localStorage.setItem('wortbausteine_userdata_v2', JSON.stringify(userData));
+            localStorage.setItem('wortbausteine_userdata_v3', JSON.stringify(userData));
         }
 
         function loadUserData() {
-            const saved = localStorage.getItem('wortbausteine_userdata_v2');
+            const saved = localStorage.getItem('wortbausteine_userdata_v3');
             if (saved) {
                 try {
                     userData = JSON.parse(saved);
@@ -657,8 +690,12 @@
                 let badgeColor = "bg-stone-100 text-stone-700 dark:bg-stone-700 dark:text-stone-300";
                 let typeName = "語根";
                 if (part.type === 'prefix') {
-                    badgeColor = "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300";
-                    typeName = "接頭辞";
+                    // Check if it is separable
+                    const isSeparable = ["mit-", "ein-", "aus-", "auf-", "an-", "ab-", "zu-"].includes(part.text);
+                    badgeColor = isSeparable 
+                        ? "bg-rose-100 text-rose-700 border border-rose-300 dark:bg-rose-950/60 dark:text-rose-200"
+                        : "bg-orange-100 text-orange-700 dark:bg-orange-950/50 dark:text-orange-300";
+                    typeName = isSeparable ? "分離接頭辞" : "接頭辞";
                 } else if (part.type === 'suffix') {
                     badgeColor = "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300";
                     typeName = "接尾辞";
@@ -704,8 +741,11 @@
             let badgeStyle = "bg-stone-100 text-stone-700 dark:bg-stone-700 dark:text-stone-300";
             let typeLabel = "語根 (Stamm)";
             if (part.type === 'prefix') {
-                badgeStyle = "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300";
-                typeLabel = "接頭辞 (Präfix)";
+                const isSeparable = ["mit-", "ein-", "aus-", "auf-", "an-", "ab-", "zu-"].includes(part.text);
+                badgeStyle = isSeparable 
+                    ? "bg-rose-100 text-rose-700 border border-rose-300 dark:bg-rose-950/60 dark:text-rose-200"
+                    : "bg-orange-100 text-orange-700 dark:bg-orange-950/50 dark:text-orange-300";
+                typeLabel = isSeparable ? "分離接頭辞 (Trennbar)" : "非分離接頭辞";
             } else if (part.type === 'suffix') {
                 badgeStyle = "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300";
                 typeLabel = "接尾辞 (Suffix)";
@@ -770,7 +810,7 @@
                 ...WORD_PARTS_DATA.roots.map(r => r.text)
             ];
 
-            while (distractorPool.length < 3) {
+            while (distractorPool.length < 4) {
                 const randPart = allDatabaseParts[Math.floor(Math.random() * allDatabaseParts.length)];
                 if (!activePool.includes(randPart) && !distractorPool.includes(randPart)) {
                     distractorPool.push(randPart);
@@ -1000,9 +1040,9 @@
                 constStreakElem.innerText = userData.stats.constructorStreak;
             }
 
-            // Total unique parts is 7 (prefixes) + 7 (suffixes) + 8 (roots) = 22
-            document.getElementById('header-progress-count').innerText = `${userData.masteredParts.length} / 22`;
-            document.getElementById('master-badge-ratio').innerText = `${userData.masteredParts.length}/22`;
+            // Total unique parts is 11 (prefixes) + 9 (suffixes) + 12 (roots) = 32
+            document.getElementById('header-progress-count').innerText = `${userData.masteredParts.length} / 32`;
+            document.getElementById('master-badge-ratio').innerText = `${userData.masteredParts.length}/32`;
         }
 
         function unlockWordParts(partsTextArray) {
@@ -1033,7 +1073,7 @@
 
             if (userData.masteredParts.length === 0) {
                 container.className = "text-center py-6 text-xs text-stone-400 italic bg-stone-50 dark:bg-stone-900/40 rounded-2xl border border-dashed border-stone-200 dark:border-stone-800 w-full";
-                container.innerText = "まだ習得したパーツがありません。クイズに答えて開放しましょう！";
+                container.innerText = "まだ習得したパーツがありません。クイズやパズルをクリアしてパーツをマスターしましょう！";
                 return;
             }
 
