@@ -1,1 +1,1 @@
-# germanwordparts
+# Geminiに作らせたドイツ語単語練習用サイト
